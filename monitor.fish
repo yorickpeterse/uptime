@@ -31,6 +31,7 @@ while true
 
             echo "http_response_times,host=$host tcp=$time_tcp,tls=$time_tls,sum=$time_sum" \
                 | ncat --udp $DB_IP $DB_PORT
+            echo "$host: $time_sum seconds"
         end
 
         # Wait a little bit in between each site in case they're all on the same
