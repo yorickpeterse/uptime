@@ -21,6 +21,7 @@ while true
                 --write-out "%{time_connect}\n%{time_appconnect}\n%{time_total}" \
                 --output /dev/null \
                 --head \
+                --user-agent "Uptime bot (https://github.com/yorickpeterse/uptime)" \
                 https://$host
         )
 
