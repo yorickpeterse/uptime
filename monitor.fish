@@ -18,7 +18,7 @@ while true
                 --silent \
                 --connect-timeout 5 \
                 --max-time 5 \
-                --write-out "%{time_connect}\n%{time_appconnect}\n%{time_total}" \
+                --write-out "%{time_namelookup}\n%{time_connect}\n%{time_appconnect}\n%{time_total}" \
                 --output /dev/null \
                 --head \
                 --user-agent "Uptime bot (https://github.com/yorickpeterse/uptime)" \
@@ -26,11 +26,12 @@ while true
         )
 
         if test $status -eq 0
-            set time_tcp $timings[1]
-            set time_tls $timings[2]
-            set time_sum $timings[3]
+            set time_dns $timings[1]
+            set time_tcp $timings[2]
+            set time_tls $timings[3]
+            set time_sum $timings[4]
 
-            echo "http_response_times,host=$host tcp=$time_tcp,tls=$time_tls,sum=$time_sum" \
+            echo "http_response_times,host=$host dns=$time_dns,tcp=$time_tcp,tls=$time_tls,sum=$time_sum" \
                 | ncat --udp $DB_IP $DB_PORT
             echo "$host: $time_sum seconds"
         end
