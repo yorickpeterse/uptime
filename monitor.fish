@@ -11,6 +11,10 @@ if ! test -n "$DB_PORT"
 end
 
 while true
+    # Sleep with a random interval so we're less likely to miss outliers that
+    # happen to be in between an otherwise fixed interval.
+    sleep (random 180 300)
+
     for host in $argv
         set timings (
             curl --fail \
@@ -40,8 +44,4 @@ while true
         # server.
         sleep (random 1 10)
     end
-
-    # Sleep with a random interval so we're less likely to miss outliers that
-    # happen to be in between an otherwise fixed interval.
-    sleep (random 180 300)
 end
