@@ -26,7 +26,7 @@ while true
                 --output /dev/null \
                 --head \
                 --user-agent "Uptime bot (https://github.com/yorickpeterse/uptime)" \
-                https://$host
+                $host
         )
 
         if test $status -eq 0
