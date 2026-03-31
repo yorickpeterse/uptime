@@ -32,7 +32,13 @@ while true
         if test $status -eq 0
             set time_dns $timings[1]
             set time_tcp (math "$timings[2] - $timings[1]")
-            set time_tls (math "$timings[3] - $timings[2]")
+
+            if test $timings[3] -gt 0
+                set time_tls (math "$timings[3] - $timings[2]")
+            else
+                set time_tls 0
+            end
+
             set time_sum $timings[4]
 
             echo "http_response_times,host=$host dns=$time_dns,tcp=$time_tcp,tls=$time_tls,sum=$time_sum" \
